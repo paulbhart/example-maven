@@ -3,5 +3,7 @@
 output/
 build/
 target/
+/pom.xml.versionsBackup
+/.idea/
 .idea/
 pom.xml.versionsBackup
