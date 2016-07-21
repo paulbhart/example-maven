@@ -3,10 +3,45 @@
     <groupId>com.github</groupId>
     <artifactId>egitdemo</artifactId>
     <packaging>jar</packaging>
-    <version>1.1-newfeature_1-SNAPSHOT</version>
+    <version>1.1-newfeature_1-demoforrobert-SNAPSHOT</version>
     <name>egitdemo</name>
     <build>
     <plugins>
+        <!--<plugin>-->
+            <!--<groupId>com.e-gineering</groupId>-->
+            <!--<artifactId>gitflow-helper-maven-plugin</artifactId>-->
+            <!--<version>${gitflow.helper.plugin.version}</version>-->
+            <!--<extensions>true</extensions>-->
+            <!--<configuration>-->
+                <!--&lt;!&ndash; These repository definitions expect id::layout::url::unique, for example-->
+                     <!--release::default::https://some.server.path/content/repositories/test-releases::false-->
+                <!--&ndash;&gt;-->
+                <!--<releaseDeploymentRepository>${release.repository}</releaseDeploymentRepository>-->
+                <!--<stageDeploymentRepository>${stage.repository}</stageDeploymentRepository>-->
+                <!--<snapshotDeploymentRepository>${snapshot.repository}</snapshotDeploymentRepository>-->
+                <!--&lt;!&ndash; The plugin will read the git branch ang git url by resolving these properties at run-time &ndash;&gt;-->
+                <!--<gitBranchProperty>-->
+            <!--</configuration>-->
+            <!--<executions>-->
+                <!--<execution>-->
+                    <!--<goals>-->
+                        <!--<goal>enforce-versions</goal>-->
+                        <!--<goal>retarget-deploy</goal>-->
+                        <!--<goal>tag-master</goal>-->
+                        <!--<goal>promote-master</goal>-->
+                        <!--<goal>set-properties</goal>-->
+                    <!--</goals>-->
+                    <!--<configuration>-->
+                        <!--<masterBranchPropertyFile>foo/bar/prod.props</masterBranchPropertyFile>-->
+                        <!--<hotfixBranchPropertyFile>foo/bar/emer.props</hotfixBranchPropertyFile>-->
+                        <!--<releaseBranchPropertyFile>foo/bar/test.props</releaseBranchPropertyFile>-->
+                        <!--<developmentBranchPropertyFile>foo/bar/dev.props</developmentBranchPropertyFile>-->
+                        <!--<otherBranchPropertyFile>foo/bar/ci.props</otherBranchPropertyFile>-->
+                        <!--<undefinedBranchPropertyFile>foo/bar/local.props</undefinedBranchPropertyFile>-->
+                    <!--</configuration>-->
+                <!--</execution>-->
+            <!--</executions>-->
+        <!--</plugin>-->
         <plugin>
             <groupId>external.atlassian.jgitflow</groupId>
             <artifactId>jgitflow-maven-plugin</artifactId>
