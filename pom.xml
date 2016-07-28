@@ -4,7 +4,7 @@
     <artifactId>egitdemo</artifactId>
     <packaging>jar</packaging>
     <scm>
-        <developerConnection>scm:git:ssh://github.com:paulbhart/example-maven.git</developerConnection>
+        <developerConnection>scm:git:ssh://github.com/paulbhart/example-maven.git</developerConnection>
       <tag>egitdemo-0.1.0</tag>
   </scm>
     <version>0.1.0</version>
