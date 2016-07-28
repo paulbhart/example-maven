@@ -5,8 +5,9 @@
     <packaging>jar</packaging>
     <scm>
         <developerConnection>scm:git:ssh://github.com:paulbhart/example-maven.git</developerConnection>
-    </scm>
-    <version>0.1.0-SNAPSHOT</version>
+      <tag>egitdemo-0.1.0</tag>
+  </scm>
+    <version>0.1.0</version>
     <name>egitdemo</name>
     <build>
     <plugins>
@@ -302,35 +303,35 @@
                     <!--<phase>validate</phase>-->
                     <!--<configuration>-->
                         <!--<target>-->
-                            <!--<echo message="buildnumber-maven-plugin properties:"/>-->
-                            <!--<echo message="  $${scmBranch}:                  ${scmBranch}" />-->
-                            <!--<echo message="  $${buildNumber}:                ${buildNumber}" />-->
-                            <!--<echo message="  $${timestamp}:                  ${timestamp}" />-->
+                            <!--<echo message="buildnumber-maven-plugin properties:" />-->
+                            <!--<echo message=" $${scmBranch}:                  ${scmBranch}" />-->
+                            <!--<echo message=" $${buildNumber}:                ${buildNumber}" />-->
+                            <!--<echo message=" $${timestamp}:                  ${timestamp}" />-->
 
-                            <!--<echo message="maven-jgit-buildnumber-plugin properties:"/>-->
-                            <!--<echo message="  $${git.revision}:               ${git.revision}" />-->
-                            <!--<echo message="  $${git.branch}:                 ${git.branch}" />-->
-                            <!--<echo message="  $${git.tag}:                    ${git.tag}" />-->
-                            <!--<echo message="  $${git.commitsCount}:           ${git.commitsCount}" />-->
-                            <!--<echo message="  $${git.buildnumber}:            ${git.buildnumber}" />-->
+                            <!--<echo message="maven-jgit-buildnumber-plugin properties:" />-->
+                            <!--<echo message=" $${git.revision}:               ${git.revision}" />-->
+                            <!--<echo message=" $${git.branch}:                 ${git.branch}" />-->
+                            <!--<echo message=" $${git.tag}:                    ${git.tag}" />-->
+                            <!--<echo message=" $${git.commitsCount}:           ${git.commitsCount}" />-->
+                            <!--<echo message=" $${git.buildnumber}:            ${git.buildnumber}" />-->
 
 
-                            <!--<echo message="git-commit-id-plugin properties (aliased with git-commit-id):"/>-->
-                            <!--<echo message="  $${git.branch}:                 ${git-commit-id.branch}" />-->
+                            <!--<echo message="git-commit-id-plugin properties (aliased with git-commit-id):" />-->
+                            <!--<echo message=" $${git.branch}:                 ${git-commit-id.branch}" />-->
 
-                            <!--<echo message="  $${git.commit.id.describe}:     ${git-commit-id.commit.id.describe}" />-->
+                            <!--<echo message=" $${git.commit.id.describe}:     ${git-commit-id.commit.id.describe}" />-->
 
-                            <!--<echo message="  $${git.build.user.name}:        ${git-commit-id.build.user.name}" />-->
-                            <!--<echo message="  $${git.build.user.email}:       ${git-commit-id.build.user.email}" />-->
-                            <!--<echo message="  $${git.build.time}:             ${git-commit-id.build.time}" />-->
+                            <!--<echo message=" $${git.build.user.name}:        ${git-commit-id.build.user.name}" />-->
+                            <!--<echo message=" $${git.build.user.email}:       ${git-commit-id.build.user.email}" />-->
+                            <!--<echo message=" $${git.build.time}:             ${git-commit-id.build.time}" />-->
 
-                            <!--<echo message="  $${git.commit.id}:              ${git-commit-id.commit.id}" />-->
-                            <!--<echo message="  $${git.commit.id.abbrev}:       ${git-commit-id.commit.id.abbrev}" />-->
-                            <!--<echo message="  $${git.commit.user.name}:       ${git-commit-id.commit.user.name}" />-->
-                            <!--<echo message="  $${git.commit.user.email}:      ${git-commit-id.commit.user.email}" />-->
-                            <!--<echo message="  $${git.commit.message.full}:    ${git-commit-id.commit.message.full}" />-->
-                            <!--<echo message="  $${git.commit.message.short}:   ${git-commit-id.commit.message.short}" />-->
-                            <!--<echo message="  $${git.commit.time}:            ${git-commit-id.commit.time}" />-->
+                            <!--<echo message=" $${git.commit.id}:              ${git-commit-id.commit.id}" />-->
+                            <!--<echo message=" $${git.commit.id.abbrev}:       ${git-commit-id.commit.id.abbrev}" />-->
+                            <!--<echo message=" $${git.commit.user.name}:       ${git-commit-id.commit.user.name}" />-->
+                            <!--<echo message=" $${git.commit.user.email}:      ${git-commit-id.commit.user.email}" />-->
+                            <!--<echo message=" $${git.commit.message.full}:    ${git-commit-id.commit.message.full}" />-->
+                            <!--<echo message=" $${git.commit.message.short}:   ${git-commit-id.commit.message.short}" />-->
+                            <!--<echo message=" $${git.commit.time}:            ${git-commit-id.commit.time}" />-->
                         <!--</target>-->
                     <!--</configuration>-->
                 <!--</execution>-->
