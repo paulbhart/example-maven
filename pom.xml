@@ -3,71 +3,164 @@
     <groupId>com.github</groupId>
     <artifactId>egitdemo</artifactId>
     <packaging>jar</packaging>
-    <version>1.1-newfeature_1-demoforrobert-SNAPSHOT</version>
+    <scm>
+        <developerConnection>scm:git:ssh://github.com:paulbhart/example-maven.git</developerConnection>
+    </scm>
+    <version>0.1.0-SNAPSHOT</version>
     <name>egitdemo</name>
     <build>
     <plugins>
-        <!--<plugin>-->
-            <!--<groupId>com.e-gineering</groupId>-->
-            <!--<artifactId>gitflow-helper-maven-plugin</artifactId>-->
-            <!--<version>${gitflow.helper.plugin.version}</version>-->
-            <!--<extensions>true</extensions>-->
-            <!--<configuration>-->
-                <!--&lt;!&ndash; These repository definitions expect id::layout::url::unique, for example-->
-                     <!--release::default::https://some.server.path/content/repositories/test-releases::false-->
-                <!--&ndash;&gt;-->
-                <!--<releaseDeploymentRepository>${release.repository}</releaseDeploymentRepository>-->
-                <!--<stageDeploymentRepository>${stage.repository}</stageDeploymentRepository>-->
-                <!--<snapshotDeploymentRepository>${snapshot.repository}</snapshotDeploymentRepository>-->
-                <!--&lt;!&ndash; The plugin will read the git branch ang git url by resolving these properties at run-time &ndash;&gt;-->
-                <!--<gitBranchProperty>-->
-            <!--</configuration>-->
-            <!--<executions>-->
-                <!--<execution>-->
-                    <!--<goals>-->
-                        <!--<goal>enforce-versions</goal>-->
-                        <!--<goal>retarget-deploy</goal>-->
-                        <!--<goal>tag-master</goal>-->
-                        <!--<goal>promote-master</goal>-->
-                        <!--<goal>set-properties</goal>-->
-                    <!--</goals>-->
-                    <!--<configuration>-->
-                        <!--<masterBranchPropertyFile>foo/bar/prod.props</masterBranchPropertyFile>-->
-                        <!--<hotfixBranchPropertyFile>foo/bar/emer.props</hotfixBranchPropertyFile>-->
-                        <!--<releaseBranchPropertyFile>foo/bar/test.props</releaseBranchPropertyFile>-->
-                        <!--<developmentBranchPropertyFile>foo/bar/dev.props</developmentBranchPropertyFile>-->
-                        <!--<otherBranchPropertyFile>foo/bar/ci.props</otherBranchPropertyFile>-->
-                        <!--<undefinedBranchPropertyFile>foo/bar/local.props</undefinedBranchPropertyFile>-->
-                    <!--</configuration>-->
-                <!--</execution>-->
-            <!--</executions>-->
-        <!--</plugin>-->
         <plugin>
-            <groupId>external.atlassian.jgitflow</groupId>
-            <artifactId>jgitflow-maven-plugin</artifactId>
-            <version>1.0-m5.1</version>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-scm-plugin</artifactId>
+            <version>1.9.5</version>
             <configuration>
-                <flowInitContext>
-                    <masterBranchName>master</masterBranchName>
-                    <developBranchName>development</developBranchName>
-                    <featureBranchPrefix>feature-</featureBranchPrefix>
-                    <releaseBranchPrefix>release-</releaseBranchPrefix>
-                    <hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
-                    <versionTagPrefix />
-                </flowInitContext>
+                <connectionType>developerConnection</connectionType>
             </configuration>
         </plugin>
+        <!-- enable JGit plugin -->
+        <plugin>
+            <groupId>ru.concerteza.buildnumber</groupId>
+            <artifactId>maven-jgit-buildnumber-plugin</artifactId>
+            <version>1.2.9</version>
+            <executions>
+                <execution>
+                    <id>git-buildnumber</id>
+                    <goals>
+                        <goal>extract-buildnumber</goal>
+                    </goals>
+                    <phase>validate</phase>
+                </execution>
+            </executions>
+        </plugin>
+        <!-- specify manifest fields -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>2.3.2</version>
+            <configuration>
+                <archive>
+                    <manifestEntries>
+                        <Specification-Title>${project.name}</Specification-Title>
+                        <Specification-Version>${project.version}</Specification-Version>
+
+                        <Implementation-Title>${project.groupId}.${project.artifactId}</Implementation-Title>
+                        <Implementation-Version>${git.revision}</Implementation-Version>
+
+                        <X-Git-Branch>${git.branch}</X-Git-Branch>
+                        <X-Git-Tag>${git.tag}</X-Git-Tag>
+                        <X-Git-Commits-Count>${git.commitsCount}</X-Git-Commits-Count>
+                    </manifestEntries>
+                </archive>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>com.e-gineering</groupId>
+            <artifactId>gitflow-helper-maven-plugin</artifactId>
+            <version>1.4.0</version>
+            <extensions>true</extensions>
+            <configuration>
+                <!-- These repository definitions expect id::layout::url::unique, for example
+                     release::default::https://some.server.path/content/repositories/test-releases::false
+                -->
+                <releaseDeploymentRepository>releases::default::http://vmlnxbandd.lowes.com/nexus/content/repositories/EA_TEST_PROD/::false</releaseDeploymentRepository>
+                <stageDeploymentRepository>stage::default::http://vmlnxbandd.lowes.com/nexus/content/repositories/EA_TEST_QA/::false</stageDeploymentRepository>
+                <snapshotDeploymentRepository>snapshots::default::http://vmlnxbandd.lowes.com/nexus/content/repositories/EA_TEST/::true</snapshotDeploymentRepository>
+                <releaseBranchPattern>origin/release-(.*)</releaseBranchPattern>
+                <hotfixBranchPattern>origin/hotfix-(.*)</hotfixBranchPattern>
+                <developmentBranchPattern>origin/(development|feature-(.*))</developmentBranchPattern>
+                <masterBranchPattern>origin/master</masterBranchPattern>
+                <!-- The plugin will read the git branch ang git url by resolving these properties at run-time -->
+
+            </configuration>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>enforce-versions</goal>
+                        <goal>retarget-deploy</goal>
+                        <goal>tag-master</goal>
+                        <goal>promote-master</goal>
+                        <goal>set-properties</goal>
+                    </goals>
+                    <configuration>
+                        <!--<masterBranchPropertyFile>properties/prod.props</masterBranchPropertyFile>-->
+                        <!--<hotfixBranchPropertyFile>properties/emer.props</hotfixBranchPropertyFile>-->
+                        <!--<releaseBranchPropertyFile>properties/test.props</releaseBranchPropertyFile>-->
+                        <!--<developmentBranchPropertyFile>properties/dev.props</developmentBranchPropertyFile>-->
+                        <otherBranchPropertyFile>properties/ci.props</otherBranchPropertyFile>
+                        <!--<undefinedBranchPropertyFile>properties/local.props</undefinedBranchPropertyFile>-->
+                        <tag>${project.artifactId}-${project.version}</tag>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.7</version>
+            <executions>
+                <execution>
+                    <id>echo-properties</id>
+                    <goals>
+                        <goal>run</goal>
+                    </goals>
+                    <phase>validate</phase>
+                    <configuration>
+                        <target>
+                            <echo message="buildnumber-maven-plugin properties:"/>
+                            <echo message="  $${scmBranch}:                  ${scmBranch}" />
+                            <echo message="  $${buildNumber}:                ${buildNumber}" />
+                            <echo message="  $${timestamp}:                  ${timestamp}" />
+
+                            <echo message="maven-jgit-buildnumber-plugin properties:"/>
+                            <echo message="  $${git.revision}:               ${git.revision}" />
+                            <echo message="  $${git.branch}:                 ${git.branch}" />
+                            <echo message="  $${git.tag}:                    ${git.tag}" />
+                            <echo message="  $${git.commitsCount}:           ${git.commitsCount}" />
+                            <echo message="  $${git.buildnumber}:            ${git.buildnumber}" />
+
+
+                            <echo message="git-commit-id-plugin properties (aliased with git-commit-id):"/>
+                            <echo message="  $${git.branch}:                 ${git-commit-id.branch}" />
+
+                            <echo message="  $${git.commit.id.describe}:     ${git-commit-id.commit.id.describe}" />
+
+                            <echo message="  $${git.build.user.name}:        ${git-commit-id.build.user.name}" />
+                            <echo message="  $${git.build.user.email}:       ${git-commit-id.build.user.email}" />
+                            <echo message="  $${git.build.time}:             ${git-commit-id.build.time}" />
+
+                            <echo message="  $${git.commit.id}:              ${git-commit-id.commit.id}" />
+                            <echo message="  $${git.commit.id.abbrev}:       ${git-commit-id.commit.id.abbrev}" />
+                            <echo message="  $${git.commit.user.name}:       ${git-commit-id.commit.user.name}" />
+                            <echo message="  $${git.commit.user.email}:      ${git-commit-id.commit.user.email}" />
+                            <echo message="  $${git.commit.message.full}:    ${git-commit-id.commit.message.full}" />
+                            <echo message="  $${git.commit.message.short}:   ${git-commit-id.commit.message.short}" />
+                            <echo message="  $${git.commit.time}:            ${git-commit-id.commit.time}" />
+                        </target>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+
+        <!--<plugin>-->
+            <!--<groupId>external.atlassian.jgitflow</groupId>-->
+            <!--<artifactId>jgitflow-maven-plugin</artifactId>-->
+            <!--<version>1.0-m5.1</version>-->
+            <!--<configuration>-->
+                <!--<flowInitContext>-->
+                    <!--<masterBranchName>master</masterBranchName>-->
+                    <!--<developBranchName>development</developBranchName>-->
+                    <!--<featureBranchPrefix>feature-</featureBranchPrefix>-->
+                    <!--<releaseBranchPrefix>release-</releaseBranchPrefix>-->
+                    <!--<hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>-->
+                    <!--<versionTagPrefix />-->
+                <!--</flowInitContext>-->
+            <!--</configuration>-->
+        <!--</plugin>-->
     </plugins>
     </build>
-    <url>http://maven.apache.org</url>
-    <distributionManagement>
 
-        <repository>
-            <id>EA_TEST</id>
-            <name>MyCo Internal Repository</name>
-            <url>http://vmlnxbandd.lowes.com/nexus/content/repositories/EA_TEST/</url>
-        </repository>
-    </distributionManagement>
+
 
     <dependencies>
         <dependency>
