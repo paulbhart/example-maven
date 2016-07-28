@@ -32,6 +32,7 @@
                         <goal>revision</goal>
                     </goals>
                 </execution>
+
             </executions>
 
             <configuration>
@@ -58,7 +59,7 @@
                 <dateFormatTimeZone>${user.timezone}</dateFormatTimeZone>
 
                 <!-- false is default here, it prints some more information during the build -->
-                <verbose>false</verbose>
+                <verbose>true</verbose>
 
                 <!-- ALTERNATE SETUP - GENERATE FILE -->
                 <!--
@@ -199,7 +200,7 @@
                      *Note*: Depending on your plugin configuration you obviously can choose the 'prefix' of your properties by setting it accordingly in the plugin's configuration. As a result this is therefore only an illustration what the switch means when the 'prefix' is set to it's default value.
                      *Note*: If you set the value to something that's not equal to 'flat' or 'full' (ignoring the case) the plugin will output a warning and will fallback to the default 'flat' mode.
                 -->
-                <commitIdGenerationMode>flat</commitIdGenerationMode>
+                <commitIdGenerationMode>full</commitIdGenerationMode>
 
                 <!-- @since 2.1.0 -->
                 <!--
@@ -216,7 +217,7 @@
                         if no tag was found "near" this commit, just print the commit's id instead,
                         helpful when you always expect this field to be not-empty
                     -->
-                    <always>false</always>
+                    <always>true</always>
                     <!--
                          how many chars should be displayed as the commit object id?
                          7 is git's default,
@@ -242,31 +243,7 @@
                     Since version **2.2.2** the maven-git-commit-id-plugin comes equipped with an additional validation utility which can be used to verify if your project properties are set as you would like to have them set.
                     *Note*: This configuration will only be taken into account when the additional goal `validateRevision` is configured inside an execution.
                 -->
-                <validationProperties>
-                    <validationProperty>
-                        <!--
-                             A descriptive name that will be used to be able to identify the validation that does not match up (will be displayed in the error message).
-                        -->
-                        <name>validating project version</name>
-                        <!--
-                             the value that needs the validation
-                             *Note* : In order to be able to validate the generated git-properties inside the pom itself you may need to set the configutation `<injectAllReactorProjects>true</injectAllReactorProjects>`.
-                        -->
-                        <value>${project.version}</value>
-                        <!--
-                            the expected value
-                        -->
-                        <shouldMatchTo><![CDATA[^.*(?<!-SNAPSHOT)$]]></shouldMatchTo>
-                    </validationProperty>
-                    <!-- the next validationProperty you would like to validate -->
-                </validationProperties>
-                <!-- @since 2.2.2 -->
-                <!--
-                    true by default, controls whether the validation will fail if *at least one* of the validationProperties does not match with it's expected values.
-                    If you don't care about this, you may want to set this value to false (this makes the configuration of validationProperties useless).
-                    *Note*: This configuration will only be taken into account when the additional goal `validateRevision` is configured inside an execution and at least one validationProperty is defined.
-                -->
-                <validationShouldFailIfNoMatch>true</validationShouldFailIfNoMatch>
+
             </configuration>
 
         </plugin>
